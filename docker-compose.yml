@@ -1,0 +1,16 @@
+ services:
+  skillbridge:
+    image: ghcr.io/shaikarshad11421-create/skillbridge:latest
+    container_name: skillbridge-container
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+    volumes:
+      - ./docker-data/skillbridge.db:/app/skillbridge.db
+  watchtower:
+    image: nickfedor/watchtower:latest
+    container_name: skillbridge-watchtower
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --interval 60 --cleanup
