@@ -1,67 +1,218 @@
- <!DOCTYPE html>
+ 
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | SkillBridge</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+        body {
+            background: #f4f6fc;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .dashboard {
+            max-width: 1100px;
+            margin: auto;
+            padding: 30px 20px;
+        }
+
+        .dash-header {
+            background: linear-gradient(135deg, #5146e5, #8175ff);
+            color: white;
+            padding: 35px;
+            border-radius: 18px;
+            margin-bottom: 25px;
+        }
+
+        .dash-header h1 {
+            margin: 0 0 10px;
+        }
+
+        .dash-header p {
+            color: white;
+        }
+
+        .profile-card {
+            background: white;
+            padding: 22px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px #00000010;
+        }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+        }
+
+        .profile-item {
+            background: #f4f5ff;
+            padding: 15px;
+            border-radius: 10px;
+            overflow-wrap: anywhere;
+        }
+
+        .profile-item strong {
+            display: block;
+            color: #5146e5;
+            margin-bottom: 5px;
+        }
+
+        .section-title {
+            margin: 25px 0 15px;
+            color: #20243a;
+        }
+
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+        }
+
+        .action-card {
+            background: white;
+            padding: 23px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px #00000010;
+            border: 1px solid #ececff;
+            transition: 0.2s;
+        }
+
+        .action-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 22px #00000018;
+        }
+
+        .action-card h3 {
+            color: #5146e5;
+            margin-top: 0;
+        }
+
+        .action-card p {
+            color: #666;
+            min-height: 42px;
+        }
+
+        .action-card a {
+            display: inline-block;
+            background: #5146e5;
+            color: white !important;
+            text-decoration: none !important;
+            padding: 11px 16px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .action-card a:hover {
+            background: #3930b8;
+        }
+
+        .logout-area {
+            text-align: right;
+            margin-top: 25px;
+        }
+
+        .logout-area a {
+            color: #dc3545;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        @media(max-width: 600px) {
+            .dash-header {
+                padding: 25px 20px;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-    <div class="register-container">
+<div class="dashboard">
 
-        <h1>SkillBridge Dashboard</h1>
-
+    <div class="dash-header">
+        <h1>SkillBridge</h1>
         <h2>Welcome, {{ student.full_name }}!</h2>
-        <p>Your student account is active.</p>
+        <p>Your learning journey starts here. Connect, learn and share skills.</p>
+    </div>
 
-        <hr>
+    <div class="profile-card">
+        <h2>Student Profile</h2>
 
-        <h3>Student Profile</h3>
+        <div class="profile-grid">
+            <div class="profile-item">
+                <strong>Name</strong>
+                {{ student.full_name }}
+            </div>
 
-        <p><strong>Name:</strong> {{ student.full_name }}</p>
-        <p><strong>Email:</strong> {{ student.email }}</p>
-        <p><strong>College:</strong> {{ student.college }}</p>
-        <p><strong>Department:</strong> {{ student.department }}</p>
-        <p><strong>Year:</strong> {{ student.year }}</p>
+            <div class="profile-item">
+                <strong>Email</strong>
+                {{ student.email }}
+            </div>
 
-        <br>
+            <div class="profile-item">
+                <strong>College</strong>
+                {{ student.college }}
+            </div>
 
-        <a href="{{ url_for('skills') }}" class="primary-btn">
-            Manage My Skills
-        </a>
+            <div class="profile-item">
+                <strong>Department</strong>
+                {{ student.department }}
+            </div>
 
-        <br><br>
+            <div class="profile-item">
+                <strong>Year</strong>
+                {{ student.year }}
+            </div>
+        </div>
+    </div>
 
-        <a href="{{ url_for('matches') }}" class="primary-btn">
-            Find Skill Partners
-        </a>
+    <h2 class="section-title">Explore SkillBridge</h2>
 
-        <br><br>
+    <div class="action-grid">
 
-        <a href="{{ url_for('received_requests') }}" class="primary-btn">
-            View Received Requests
-        </a>
+        <div class="action-card">
+            <h3>Manage My Skills</h3>
+            <p>Add or update the skills you can teach and want to learn.</p>
+            <a href="{{ url_for('skills') }}">Manage Skills</a>
+        </div>
 
-        <br><br>
+        <div class="action-card">
+            <h3>Find Skill Partners</h3>
+            <p>Discover students who can exchange knowledge with you.</p>
+            <a href="{{ url_for('matches') }}">Find Partners</a>
+        </div>
 
-        <a href="{{ url_for('connections') }}" class="primary-btn">
-            My Connections
-        </a>
+        <div class="action-card">
+            <h3>Received Requests</h3>
+            <p>View and respond to learning requests from other students.</p>
+            <a href="{{ url_for('received_requests') }}">View Requests</a>
+        </div>
 
-        <br><br>
+        <div class="action-card">
+            <h3>My Connections</h3>
+            <p>Connect with students whose learning requests are accepted.</p>
+            <a href="{{ url_for('connections') }}">My Connections</a>
+        </div>
 
-        <a href="{{ url_for('my_sessions') }}" class="primary-btn">
-            My Sessions
-        </a>
-
-        <br><br>
-
-        <a href="{{ url_for('logout') }}" class="primary-btn">
-            Logout
-        </a>
+        <div class="action-card">
+            <h3>My Sessions</h3>
+            <p>View your scheduled learning sessions and meeting details.</p>
+            <a href="{{ url_for('my_sessions') }}">View Sessions</a>
+        </div>
 
     </div>
+
+    <div class="logout-area">
+        <a href="{{ url_for('logout') }}">Logout →</a>
+    </div>
+
+</div>
 
 </body>
 </html>

@@ -4,10 +4,313 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillBridge - Learn, Teach & Grow</title>
 
-    <title>SkillBridge - Learn & Teach</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #f7f8ff;
+            color: #20243a;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 7%;
+            background: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 3px 15px #0000000d;
+        }
+
+        .logo {
+            color: #5146e5;
+            font-size: 27px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #444;
+            font-weight: bold;
+        }
+
+        .nav-links a:hover {
+            color: #5146e5;
+        }
+
+        .nav-btn, .primary-btn, .secondary-btn {
+            display: inline-block;
+            padding: 13px 23px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .nav-btn, .primary-btn {
+            background: #5146e5;
+            color: white;
+        }
+
+        .nav-btn:hover, .primary-btn:hover {
+            background: #3930b8;
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            min-height: 540px;
+            padding: 85px 8%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+            background: linear-gradient(120deg, #f0efff, #e9f3ff);
+        }
+
+        .hero-content {
+            max-width: 650px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #dedbff;
+            color: #5146e5;
+            padding: 9px 15px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 {
+            font-size: clamp(36px, 5vw, 57px);
+            line-height: 1.15;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 span {
+            color: #5146e5;
+        }
+
+        .hero-content > p {
+            color: #62677b;
+            font-size: 17px;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        .secondary-btn {
+            border: 2px solid #5146e5;
+            color: #5146e5;
+        }
+
+        .secondary-btn:hover {
+            background: #5146e5;
+            color: white;
+        }
+
+        .hero-card {
+            width: 340px;
+            min-width: 280px;
+            padding: 35px;
+            border-radius: 22px;
+            background: white;
+            box-shadow: 0 15px 45px #5146e526;
+        }
+
+        .card-icon {
+            width: 65px;
+            height: 65px;
+            background: #eeedff;
+            color: #5146e5;
+            display: grid;
+            place-items: center;
+            border-radius: 17px;
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 22px;
+        }
+
+        .hero-card h2 {
+            margin-bottom: 12px;
+        }
+
+        .hero-card p {
+            color: #777;
+            line-height: 1.7;
+        }
+
+        .student-info {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            border-top: 1px solid #eee;
+            padding-top: 22px;
+            margin-top: 25px;
+        }
+
+        .avatar {
+            width: 45px;
+            height: 45px;
+            background: #5146e5;
+            color: white;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            font-weight: bold;
+        }
+
+        .student-info small {
+            color: #777;
+        }
+
+        .section {
+            padding: 75px 8%;
+            text-align: center;
+        }
+
+        .section h2 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .section-intro {
+            color: #777;
+            line-height: 1.7;
+            max-width: 650px;
+            margin: 0 auto 35px;
+        }
+
+        .about {
+            background: white;
+        }
+
+        .feature-grid, .skill-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 22px;
+            margin-top: 35px;
+        }
+
+        .feature-card, .skill-box {
+            background: #f8f8ff;
+            border: 1px solid #e9e8ff;
+            padding: 28px;
+            border-radius: 15px;
+            text-align: left;
+        }
+
+        .feature-card h3, .skill-box h3 {
+            color: #5146e5;
+            margin-bottom: 13px;
+        }
+
+        .feature-card p, .skill-box p {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        .skills {
+            background: #f7f8ff;
+        }
+
+        .how-it-works {
+            background: white;
+        }
+
+        .step-number {
+            font-size: 30px;
+            font-weight: bold;
+            color: #5146e5;
+            margin-bottom: 12px;
+        }
+
+        .contact {
+            background: linear-gradient(120deg, #5146e5, #8175ff);
+            color: white;
+        }
+
+        .contact p {
+            color: white;
+            margin: 15px auto 25px;
+        }
+
+        .contact .secondary-btn {
+            border-color: white;
+            color: white;
+        }
+
+        .contact .secondary-btn:hover {
+            background: white;
+            color: #5146e5;
+        }
+
+        footer {
+            background: #171a2d;
+            color: #ccc;
+            padding: 25px;
+            text-align: center;
+        }
+
+        @media(max-width: 750px) {
+            .navbar {
+                flex-wrap: wrap;
+                gap: 15px;
+                padding: 18px 5%;
+            }
+
+            .nav-links {
+                order: 3;
+                width: 100%;
+                justify-content: center;
+                gap: 18px;
+                flex-wrap: wrap;
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 60px 6%;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-card {
+                width: 100%;
+                max-width: 380px;
+            }
+
+            .section {
+                padding: 55px 6%;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -22,15 +325,12 @@
             <a href="#contact">Contact</a>
         </div>
 
-        <a href="{{ url_for('register') }}" class="nav-btn">
-            Get Started
-        </a>
+        <a href="{{ url_for('register') }}" class="nav-btn">Get Started</a>
     </nav>
 
     <section class="hero" id="home">
 
         <div class="hero-content">
-
             <span class="tag">STUDENT SKILL EXCHANGE PLATFORM</span>
 
             <h1>
@@ -41,107 +341,138 @@
             <p>
                 Connect with talented students, share your knowledge,
                 learn new skills and grow together.
+                Your skills can create new opportunities!
             </p>
 
             <div class="hero-buttons">
-
                 <a href="{{ url_for('register') }}" class="primary-btn">
                     Join SkillBridge
                 </a>
 
-                <a href="#about" class="secondary-btn">
-                    Explore More
+                <a href="{{ url_for('login') }}" class="secondary-btn">
+                    Login
                 </a>
-
             </div>
-
         </div>
 
         <div class="hero-card">
-            <div class="card-icon">🚀</div>
-
+            <div class="card-icon">SB</div>
             <h2>Learn Together</h2>
 
             <p>
-                Share knowledge. Build skills. Create opportunities.
+                Share knowledge. Build skills. Connect with students.
+                Grow together through skill exchange.
             </p>
 
             <div class="student-info">
-                <div class="avatar">A</div>
-
+                <div class="avatar">S</div>
                 <div>
                     <h4>Student Community</h4>
-                    <small>Learn • Teach • Grow</small>
+                    <small>Learn - Teach - Grow</small>
                 </div>
             </div>
         </div>
 
     </section>
 
-    <section class="about" id="about">
-
+    <section class="section about" id="about">
         <h2>What is SkillBridge?</h2>
 
-        <p>
+        <p class="section-intro">
             SkillBridge is a student platform where students teach
             the skills they know and learn the skills they want.
             Knowledge becomes a two-way exchange.
         </p>
 
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h3>Share Knowledge</h3>
+                <p>Teach other students the skills and knowledge you already have.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>Learn New Skills</h3>
+                <p>Find students who can help you learn something new.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>Build Connections</h3>
+                <p>Connect with students and schedule learning sessions.</p>
+            </div>
+        </div>
     </section>
 
-    <section class="skills" id="skills">
-
+    <section class="section skills" id="skills">
         <h2>Explore Skills</h2>
-
-        <p>Discover skills you can teach and learn.</p>
+        <p class="section-intro">
+            Discover different skill areas you can teach and learn.
+        </p>
 
         <div class="skill-container">
-
             <div class="skill-box">
-                <h3>💻 Programming</h3>
-                <p>Python, Java, C, C++</p>
+                <h3>Programming</h3>
+                <p>Python, Java, C and C++</p>
             </div>
 
             <div class="skill-box">
-                <h3>🌐 Web Development</h3>
-                <p>HTML, CSS, JavaScript</p>
+                <h3>Web Development</h3>
+                <p>HTML, CSS, JavaScript and Bootstrap</p>
             </div>
 
             <div class="skill-box">
-                <h3>🎨 Designing</h3>
-                <p>UI/UX, Graphic Design</p>
+                <h3>Database</h3>
+                <p>SQL and database fundamentals</p>
             </div>
 
             <div class="skill-box">
-                <h3>📊 Data Science</h3>
-                <p>Python, Data Analysis, ML</p>
+                <h3>Communication</h3>
+                <p>Presentation, teamwork and communication skills</p>
             </div>
-
         </div>
-
     </section>
 
-    <section class="join" id="join">
+    <section class="section how-it-works">
+        <h2>How SkillBridge Works</h2>
+        <p class="section-intro">
+            Start your skill exchange journey in three simple steps.
+        </p>
 
-        <h2>Ready to Exchange Skills?</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="step-number">01</div>
+                <h3>Create Account</h3>
+                <p>Register as a student and create your profile.</p>
+            </div>
 
-        <p>Start your learning journey with SkillBridge.</p>
+            <div class="feature-card">
+                <div class="step-number">02</div>
+                <h3>Find Skill Partners</h3>
+                <p>Explore students who can teach or learn from you.</p>
+            </div>
 
-        <a href="{{ url_for('register') }}" class="primary-btn">
-            Create Your Account
+            <div class="feature-card">
+                <div class="step-number">03</div>
+                <h3>Connect and Learn</h3>
+                <p>Send requests, connect and schedule learning sessions.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section contact" id="contact">
+        <h2>Start Your Learning Journey!</h2>
+
+        <p>
+            Join SkillBridge and become part of a community
+            that learns and grows together.
+        </p>
+
+        <a href="{{ url_for('register') }}" class="secondary-btn">
+            Get Started Now
         </a>
-
     </section>
 
-    <footer id="contact">
-
-        <h3>SkillBridge.</h3>
-
-        <p>Teach a Skill. Learn a Skill. Grow Together.</p>
-
-        <small>© 2026 SkillBridge. All Rights Reserved.</small>
-
+    <footer>
+        <p>© 2026 SkillBridge. Learn Together. Grow Together.</p>
     </footer>
 
 </body>
