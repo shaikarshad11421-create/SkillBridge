@@ -1,0 +1,89 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Connections | SkillBridge</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="register-container">
+
+    <h1>My Skill Connections</h1>
+
+    <p>Students whose learning requests have been accepted.</p>
+
+    {% if connections %}
+
+        {% for student in connections %}
+
+        <div class="skill-box">
+
+            <h3>{{ student.full_name }}</h3>
+
+            <p>
+                <strong>Email:</strong>
+                {{ student.email }}
+            </p>
+
+            <p>
+                <strong>College:</strong>
+                {{ student.college }}
+            </p>
+
+            <p>
+                <strong>Department:</strong>
+                {{ student.department }}
+            </p>
+
+            <p>
+                <strong>Year:</strong>
+                {{ student.year }}
+            </p>
+
+            <p>Accepted Skill Exchange Connection!</p>
+
+            <hr>
+
+            <!-- Open Private Chat Button -->
+             <a href="{{ url_for('schedule_session', peer_id=student.id) }}"
+   class="primary-btn">
+    Schedule Session
+</a>
+            <a href="{{ url_for('chat', peer_id=student.id) }}"
+               class="primary-btn">
+                Open Private Chat
+            </a>
+
+        </div>
+
+        <br>
+
+        {% endfor %}
+
+    {% else %}
+
+        <h3>No Connections Yet!</h3>
+
+        <p>
+            Accept or send a learning request to create a connection.
+        </p>
+
+    {% endif %}
+
+    <br>
+
+    <a href="{{ url_for('dashboard') }}">
+        Back to Dashboard
+    </a>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Received Requests | SkillBridge</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="register-container">
+
+    <h1>Received Learning Requests</h1>
+
+    <p>Students who want to exchange skills with you.</p>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+            <p class="{{ category }}">{{ message }}</p>
+        {% endfor %}
+    {% endwith %}
+
+    {% if received %}
+
+        {% for student in received %}
+
+        <div class="skill-box">
+
+            <h3>{{ student.full_name }}</h3>
+
+            <p><strong>College:</strong> {{ student.college }}</p>
+
+            <p><strong>Department:</strong> {{ student.department }}</p>
+
+            <p><strong>Year:</strong> {{ student.year }}</p>
+
+            <hr>
+
+            <p>
+                <strong>Can Teach:</strong>
+                {{ student.teach_skills or "Not available" }}
+            </p>
+
+            <p>
+                <strong>Wants to Learn:</strong>
+                {{ student.learn_skills or "Not available" }}
+            </p>
+
+            <p>
+                <strong>Request Status:</strong>
+                {{ student.status }}
+            </p>
+
+            {% if student.status == "Pending" %}
+
+                <form method="POST"
+                      action="{{ url_for('accept_request',
+                      request_id=student.request_id) }}">
+
+                    <button type="submit">
+                        Accept Request
+                    </button>
+
+                </form>
+
+                <br>
+
+                <form method="POST"
+                      action="{{ url_for('reject_request',
+                      request_id=student.request_id) }}">
+
+                    <button type="submit">
+                        Reject Request
+                    </button>
+
+                </form>
+
+            {% elif student.status == "Accepted" %}
+
+                <p>Request Accepted Successfully!</p>
+
+            {% elif student.status == "Rejected" %}
+
+                <p>Request Rejected.</p>
+
+            {% endif %}
+
+        </div>
+
+        <br>
+
+        {% endfor %}
+
+    {% else %}
+
+        <h3>No Requests Received Yet!</h3>
+
+        <p>When students send you learning requests, they will appear here.</p>
+
+    {% endif %}
+
+    <br>
+
+    <a href="{{ url_for('dashboard') }}">
+        Back to Dashboard
+    </a>
+
+</div>
+
+</body>
+</html>

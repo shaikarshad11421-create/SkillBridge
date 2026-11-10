@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Skills | SkillBridge</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="register-container">
+    <h1>My Skills</h1>
+    <p>Select the skills you can teach and want to learn.</p>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+            <p class="{{ category }}">{{ message }}</p>
+        {% endfor %}
+    {% endwith %}
+
+    <form method="POST" action="{{ url_for('skills') }}">
+
+        <h3>Skills I Can Teach</h3>
+        <select name="teach_skills" required>
+            <option value="">Select a skill</option>
+            <option>Python</option>
+            <option>Java</option>
+            <option>C Programming</option>
+            <option>HTML</option>
+            <option>CSS</option>
+            <option>JavaScript</option>
+            <option>Web Development</option>
+            <option>UI/UX Design</option>
+            <option>Machine Learning</option>
+        </select>
+
+        <h3>Skills I Want to Learn</h3>
+        <select name="learn_skills" required>
+            <option value="">Select a skill</option>
+            <option>Python</option>
+            <option>Java</option>
+            <option>C Programming</option>
+            <option>HTML</option>
+            <option>CSS</option>
+            <option>JavaScript</option>
+            <option>Web Development</option>
+            <option>UI/UX Design</option>
+            <option>Machine Learning</option>
+        </select>
+
+        <button type="submit">Save My Skills</button>
+
+    </form>
+
+    <br>
+    <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Schedule Session | SkillBridge</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="register-container">
+
+    <h1>Schedule Skill Exchange Session</h1>
+
+    <p>Schedule a learning session with {{ peer.full_name }}</p>
+
+    <form method="POST">
+
+        <label>Session Date</label>
+        <input
+            type="date"
+            name="session_date"
+            min="{{ today }}"
+            required
+        >
+
+        <label>Session Time</label>
+        <input
+            type="time"
+            name="session_time"
+            required
+        >
+
+        <label>Meeting Details</label>
+        <textarea
+            name="meeting_details"
+            placeholder="Enter meeting link, location or other details"
+            rows="4"
+        ></textarea>
+
+        <button type="submit" class="primary-btn">
+            Schedule Session
+        </button>
+
+    </form>
+
+    <br>
+
+    <a href="{{ url_for('connections') }}">Back to Connections</a>
+
+</div>
+
+</body>
+</html>

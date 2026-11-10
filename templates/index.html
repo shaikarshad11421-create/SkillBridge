@@ -1,0 +1,148 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SkillBridge - Learn & Teach</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <h2 class="logo">SkillBridge.</h2>
+
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#contact">Contact</a>
+        </div>
+
+        <a href="{{ url_for('register') }}" class="nav-btn">
+            Get Started
+        </a>
+    </nav>
+
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <span class="tag">STUDENT SKILL EXCHANGE PLATFORM</span>
+
+            <h1>
+                Teach What You Know.
+                <span>Learn What You Love.</span>
+            </h1>
+
+            <p>
+                Connect with talented students, share your knowledge,
+                learn new skills and grow together.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="{{ url_for('register') }}" class="primary-btn">
+                    Join SkillBridge
+                </a>
+
+                <a href="#about" class="secondary-btn">
+                    Explore More
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="hero-card">
+            <div class="card-icon">🚀</div>
+
+            <h2>Learn Together</h2>
+
+            <p>
+                Share knowledge. Build skills. Create opportunities.
+            </p>
+
+            <div class="student-info">
+                <div class="avatar">A</div>
+
+                <div>
+                    <h4>Student Community</h4>
+                    <small>Learn • Teach • Grow</small>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="about" id="about">
+
+        <h2>What is SkillBridge?</h2>
+
+        <p>
+            SkillBridge is a student platform where students teach
+            the skills they know and learn the skills they want.
+            Knowledge becomes a two-way exchange.
+        </p>
+
+    </section>
+
+    <section class="skills" id="skills">
+
+        <h2>Explore Skills</h2>
+
+        <p>Discover skills you can teach and learn.</p>
+
+        <div class="skill-container">
+
+            <div class="skill-box">
+                <h3>💻 Programming</h3>
+                <p>Python, Java, C, C++</p>
+            </div>
+
+            <div class="skill-box">
+                <h3>🌐 Web Development</h3>
+                <p>HTML, CSS, JavaScript</p>
+            </div>
+
+            <div class="skill-box">
+                <h3>🎨 Designing</h3>
+                <p>UI/UX, Graphic Design</p>
+            </div>
+
+            <div class="skill-box">
+                <h3>📊 Data Science</h3>
+                <p>Python, Data Analysis, ML</p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="join" id="join">
+
+        <h2>Ready to Exchange Skills?</h2>
+
+        <p>Start your learning journey with SkillBridge.</p>
+
+        <a href="{{ url_for('register') }}" class="primary-btn">
+            Create Your Account
+        </a>
+
+    </section>
+
+    <footer id="contact">
+
+        <h3>SkillBridge.</h3>
+
+        <p>Teach a Skill. Learn a Skill. Grow Together.</p>
+
+        <small>© 2026 SkillBridge. All Rights Reserved.</small>
+
+    </footer>
+
+</body>
+</html>

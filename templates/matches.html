@@ -1,0 +1,95 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill Matches | SkillBridge</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="register-container">
+
+    <h1>Find Skill Partners</h1>
+
+    <p>Students who can exchange skills with you.</p>
+
+    <!-- Success and Error Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+            <p class="{{ category }}">{{ message }}</p>
+        {% endfor %}
+    {% endwith %}
+
+    {% if matches %}
+
+        {% for student in matches %}
+
+        <div class="skill-box">
+
+            <h3>{{ student.full_name }}</h3>
+
+            <p>
+                <strong>College:</strong>
+                {{ student.college }}
+            </p>
+
+            <p>
+                <strong>Department:</strong>
+                {{ student.department }}
+            </p>
+
+            <p>
+                <strong>Year:</strong>
+                {{ student.year }}
+            </p>
+
+            <hr>
+
+            <p>
+                <strong>Can Teach:</strong>
+                {{ student.teach_skills }}
+            </p>
+
+            <p>
+                <strong>Wants to Learn:</strong>
+                {{ student.learn_skills }}
+            </p>
+
+            <p>🤝 Skill Exchange Match!</p>
+
+            <!-- Send Learning Request -->
+            <form method="POST"
+                  action="{{ url_for('send_request', receiver_id=student.student_id) }}">
+
+                <button type="submit">
+                    Send Learning Request
+                </button>
+
+            </form>
+
+        </div>
+
+        <br>
+
+        {% endfor %}
+
+    {% else %}
+
+        <h3>No Matches Found Yet!</h3>
+
+        <p>New students may join soon. Check again later.</p>
+
+    {% endif %}
+
+    <br>
+
+    <a href="{{ url_for('dashboard') }}">
+        Back to Dashboard
+    </a>
+
+</div>
+
+</body>
+</html>

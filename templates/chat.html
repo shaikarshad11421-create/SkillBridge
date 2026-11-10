@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Private Chat | SkillBridge</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+        .chat-box {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 10px;
+            max-height: 400px;
+            overflow-y: auto;
+            margin: 20px 0;
+        }
+
+        .message {
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+            overflow-wrap: anywhere;
+        }
+
+        .my-message {
+            background: #d9fdd3;
+            margin-left: 15%;
+        }
+
+        .other-message {
+            background: #ffffff;
+            margin-right: 15%;
+        }
+
+        .message small {
+            display: block;
+            margin-top: 5px;
+            color: #666;
+        }
+
+        .chat-form textarea {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="register-container">
+
+    <h1>Private Chat</h1>
+
+    <h3>Chat with {{ peer.full_name }}</h3>
+
+    <div class="chat-box">
+
+        {% if messages %}
+
+            {% for msg in messages %}
+
+                <div class="message
+                    {% if msg.sender_id == current_id %}
+                        my-message
+                    {% else %}
+                        other-message
+                    {% endif %}">
+
+                    <strong>{{ msg.sender_name }}</strong>
+
+                    <p>{{ msg.message }}</p>
+
+                    <small>{{ msg.created_at }}</small>
+
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <p>No messages yet. Start your conversation!</p>
+
+        {% endif %}
+
+    </div>
+
+    <form method="POST"
+          action="{{ url_for('chat', peer_id=peer.id) }}"
+          class="chat-form">
+
+        <textarea
+            name="message"
+            rows="3"
+            placeholder="Type your message..."
+            required></textarea>
+
+        <button type="submit">Send Message</button>
+
+    </form>
+
+    <br>
+
+    <a href="{{ url_for('connections') }}">Back to My Connections</a>
+
+</div>
+
+</body>
+</html>

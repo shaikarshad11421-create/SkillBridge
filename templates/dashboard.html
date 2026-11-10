@@ -1,0 +1,67 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | SkillBridge</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="register-container">
+
+        <h1>SkillBridge Dashboard</h1>
+
+        <h2>Welcome, {{ student.full_name }}!</h2>
+        <p>Your student account is active.</p>
+
+        <hr>
+
+        <h3>Student Profile</h3>
+
+        <p><strong>Name:</strong> {{ student.full_name }}</p>
+        <p><strong>Email:</strong> {{ student.email }}</p>
+        <p><strong>College:</strong> {{ student.college }}</p>
+        <p><strong>Department:</strong> {{ student.department }}</p>
+        <p><strong>Year:</strong> {{ student.year }}</p>
+
+        <br>
+
+        <a href="{{ url_for('skills') }}" class="primary-btn">
+            Manage My Skills
+        </a>
+
+        <br><br>
+
+        <a href="{{ url_for('matches') }}" class="primary-btn">
+            Find Skill Partners
+        </a>
+
+        <br><br>
+
+        <a href="{{ url_for('received_requests') }}" class="primary-btn">
+            View Received Requests
+        </a>
+
+        <br><br>
+
+        <a href="{{ url_for('connections') }}" class="primary-btn">
+            My Connections
+        </a>
+
+        <br><br>
+
+        <a href="{{ url_for('my_sessions') }}" class="primary-btn">
+            My Sessions
+        </a>
+
+        <br><br>
+
+        <a href="{{ url_for('logout') }}" class="primary-btn">
+            Logout
+        </a>
+
+    </div>
+
+</body>
+</html>
